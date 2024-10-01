@@ -1,11 +1,13 @@
 const body = document.querySelector("body");
 const container = document.querySelector(".container");
 const button = document.createElement("button");
-
-//Create a button for altering the grid
 button.textContent = "Change grid size";
-button.style.padding = "10px";
+
 body.insertBefore(button, container);
+
+const clearButton = document.querySelector("#reset-button");
+
+
 
 let gridSize = 16; 
 
@@ -21,6 +23,15 @@ button.addEventListener("click", () => {
         createGrid(gridSize);
     }   
 });
+
+//Event listener for clearing the grid
+clearButton.addEventListener("click", () => {
+    const boxes = document.querySelectorAll(".grid-item");
+    boxes.forEach(box => {
+        box.style.backgroundColor = "";
+    });
+});
+
 
 function getGridSizeFromUser() {
     const input = prompt("Please enter grid size.");
@@ -50,10 +61,6 @@ function createGridItem(gridSize) {
     box.addEventListener("mouseenter", () => {
         box.style.backgroundColor = randomColor();
 
-    });
-    //Reset background color on mouseleave
-    box.addEventListener("mouseleave", () => {
-        box.style.removeProperty("background-color");
     });
 
     return box;
